@@ -1,7 +1,13 @@
 const jwksRsa = require('jwks-rsa');
-const jwt = require('express-jwt');
+const jwt = require('express-jwt').expressjwt;
+require('dotenv').config()
 
-const logger = () => {}
+const logger = () => {
+  return (req, res, next) => {
+    console.log('Logging route:', req.path, new Date().toISOString())
+    next()
+  }
+}
 
 const checkJwt = jwt({
   secret: jwksRsa.expressJwtSecret({
